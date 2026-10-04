@@ -219,11 +219,60 @@ const REQUIRED = [
   ['datumOrtDsgvo', 'Datum, Ort (Datenschutz)'],
 ]
 
+const STORE_KEY = 'checkliste-2026'
 const modal = document.getElementById('pflicht-modal')
+const modalTitle = document.getElementById('pflicht-title')
+const modalText = document.getElementById('pflicht-text')
 const modalList = document.getElementById('pflicht-liste')
 const modalGoto = document.getElementById('pflicht-goto')
+const modalCopy = {
+  title: modalTitle ? modalTitle.textContent : '',
+  text: modalText ? modalText.textContent : '',
+  button: modalGoto ? modalGoto.textContent : '',
+}
 let modalLastFocus = null
 let missingFields = []
+let sending = false
+
+function persistForm() {
+  try {
+    sessionStorage.setItem(STORE_KEY, JSON.stringify(readForm()))
+  } catch (err) {
+    /* private mode */
+  }
+}
+
+function clearPersist() {
+  try {
+    sessionStorage.removeItem(STORE_KEY)
+  } catch (err) {
+    /* private mode */
+  }
+}
+
+function restoreForm() {
+  let data
+  try {
+    data = JSON.parse(sessionStorage.getItem(STORE_KEY) || '')
+  } catch (err) {
+    return
+  }
+  if (!data || typeof data !== 'object') return
+  for (const el of form.elements) {
+    if (!el.name || el.name === 'website') continue
+    const key = fieldKey(el.name)
+    const value = data[key]
+    if (el.type === 'checkbox') {
+      el.checked = MULTI.includes(key)
+        ? Array.isArray(value) && value.includes(el.value)
+        : Boolean(value)
+    } else if (el.type === 'radio') {
+      el.checked = value === el.value
+    } else if (el.tagName !== 'BUTTON' && value != null && !Array.isArray(value)) {
+      el.value = value
+    }
+  }
+}
 
 function fieldByName(name) {
   return form.elements[name]
@@ -266,6 +315,10 @@ function jumpToField(field) {
 function openModal(items) {
   missingFields = items
   markMissing(items)
+  if (modalTitle) modalTitle.textContent = modalCopy.title
+  if (modalText) modalText.textContent = modalCopy.text
+  if (modalGoto) modalGoto.textContent = modalCopy.button
+  modalList.hidden = false
   modalList.replaceChildren(
     ...items.map((item) => {
       const li = document.createElement('li')
@@ -284,20 +337,60 @@ function openModal(items) {
   ;(first || modalGoto).focus()
 }
 
-/** PHP-Ping: bei Antwort "php" native POST, sonst Mailprogramm. */
+function openSendError() {
+  missingFields = []
+  if (modalTitle) modalTitle.textContent = 'Versand fehlgeschlagen'
+  if (modalText) {
+    modalText.textContent =
+      'Die E-Mail konnte nicht verschickt werden. Ihre Angaben sind noch im Formular. Bitte versuchen Sie es gleich noch einmal.'
+  }
+  modalList.replaceChildren()
+  modalList.hidden = true
+  if (modalGoto) modalGoto.textContent = 'Zurück zum Formular'
+  modalLastFocus = document.activeElement
+  modal.hidden = false
+  document.body.style.overflow = 'hidden'
+  modalGoto?.focus()
+}
+
+/** PHP-Ping: bei Antwort "php" JSON-POST, sonst Mailprogramm. */
 function sendForm() {
+  persistForm()
   const data = readForm()
+  if (sending) return
+  sending = true
   fetch('senden.php?ping=1', { cache: 'no-store' })
     .then((response) => (response.ok ? response.text() : ''))
     .then((text) => {
-      if (String(text).trim() === 'php') {
-        form.submit()
+      if (String(text).trim() !== 'php') {
+        window.location.href = buildMailto(data)
+        return null
+      }
+      return fetch('senden.php', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json', 'X-Requested-With': 'fetch' },
+      })
+    })
+    .then(async (response) => {
+      if (!response) return
+      const payload = await response.json().catch(() => ({}))
+      if (payload.ok) {
+        clearPersist()
+        window.location.href = payload.redirect || 'danke.html'
         return
       }
-      window.location.href = buildMailto(data)
+      if (payload.error === 'pflicht') {
+        openModal(missingRequired())
+        return
+      }
+      openSendError()
     })
     .catch(() => {
       window.location.href = buildMailto(data)
+    })
+    .finally(() => {
+      sending = false
     })
 }
 
@@ -313,6 +406,7 @@ form.addEventListener('submit', (event) => {
 })
 
 form.addEventListener('input', (event) => {
+  persistForm()
   const field = event.target
   if (field && field.classList.contains('is-missing') && isFilled(field.name)) {
     field.classList.remove('is-missing')
@@ -320,6 +414,7 @@ form.addEventListener('input', (event) => {
 })
 
 form.addEventListener('change', (event) => {
+  persistForm()
   const field = event.target
   if (field && field.classList.contains('is-missing') && isFilled(field.name)) {
     field.classList.remove('is-missing')
@@ -328,7 +423,10 @@ form.addEventListener('change', (event) => {
 
 form.addEventListener('reset', () => {
   markMissing([])
+  clearPersist()
 })
+
+restoreForm()
 
 modal?.addEventListener('click', (event) => {
   if (event.target.closest('[data-close-modal]')) closeModal()

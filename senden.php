@@ -12,6 +12,40 @@ const MAIL_TO = 'mhuemmecke@gmx.de';
 const MAIL_TO_TEST = 'mhuemmecke@gmx.de, neubauer@energieweiser.de';
 const MAIL_FROM = 'Checkliste <kontakt@energieweiser.de>';
 
+require_once __DIR__ . '/smtp.php';
+
+function wantsJson(): bool
+{
+    $accept = strtolower((string) ($_SERVER['HTTP_ACCEPT'] ?? ''));
+    $requested = strtolower((string) ($_SERVER['HTTP_X_REQUESTED_WITH'] ?? ''));
+    return str_contains($accept, 'application/json') || $requested === 'fetch';
+}
+
+function fail(string $page = 'fehler.html', string $reason = 'pflicht'): void
+{
+    if (wantsJson()) {
+        header('Content-Type: application/json; charset=UTF-8');
+        header('Cache-Control: no-store');
+        http_response_code($reason === 'mail' ? 502 : 422);
+        echo json_encode(['ok' => false, 'error' => $reason], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+    header('Location: ' . $page, true, 303);
+    exit;
+}
+
+function done(): void
+{
+    if (wantsJson()) {
+        header('Content-Type: application/json; charset=UTF-8');
+        header('Cache-Control: no-store');
+        echo json_encode(['ok' => true, 'redirect' => 'danke.html'], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+    header('Location: danke.html', true, 303);
+    exit;
+}
+
 function clean(string $value): string
 {
     $value = str_replace(["\r", "\n", "\0"], ' ', $value);
@@ -112,12 +146,6 @@ function sanierungZeilen(): string
         $lines[] = '- ' . $label . ': Jahr ' . dash($jahrVal) . ', ' . dash($angabeVal);
     }
     return $lines ? implode("\n", $lines) : '–';
-}
-
-function fail(string $page = 'fehler.html'): void
-{
-    header('Location: ' . $page, true, 303);
-    exit;
 }
 
 /** true bei Aufruf von localhost / 127.0.0.1, dann Testempfänger statt Live-Mail. */
@@ -259,29 +287,33 @@ $encodedSubject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
 $to = mailTo();
 $from = MAIL_FROM;
 $sent = false;
+$smtp = smtpLocalConfig();
 
 if (isLocalRequest()) {
-    require_once __DIR__ . '/smtp.php';
-    $smtp = smtpLocalConfig();
     $from = $smtp['from'] ?? 'mhuemmecke@gmx.de';
     $dir = __DIR__ . '/tmp';
     if (!is_dir($dir) && !mkdir($dir, 0775, true) && !is_dir($dir)) {
-        fail();
+        fail('fehler.html', 'mail');
     }
     $payload = 'To: ' . $to . "\nFrom: " . $from . "\nSubject: " . $subject . "\nDate: " . date('c') . "\n\n" . $body;
     file_put_contents($dir . '/letzte-mail.txt', $payload);
-    if ($smtp === null) {
-        file_put_contents($dir . '/smtp-fehler.txt', "SMTP nicht konfiguriert. Passwort in smtp-local.php eintragen.\n");
-        fail();
-    }
+}
+
+if ($smtp !== null) {
     try {
         smtpSend($smtp, $to, $encodedSubject, $body);
         $sent = true;
-        if (is_file($dir . '/smtp-fehler.txt')) {
-            unlink($dir . '/smtp-fehler.txt');
+        if (isLocalRequest()) {
+            $errFile = __DIR__ . '/tmp/smtp-fehler.txt';
+            if (is_file($errFile)) {
+                unlink($errFile);
+            }
         }
     } catch (Throwable $e) {
-        file_put_contents($dir . '/smtp-fehler.txt', $e->getMessage() . "\n");
+        error_log('Checkliste SMTP: ' . $e->getMessage());
+        if (isLocalRequest()) {
+            file_put_contents(__DIR__ . '/tmp/smtp-fehler.txt', $e->getMessage() . "\n");
+        }
     }
 } else {
     $headers = [
@@ -296,8 +328,7 @@ if (isLocalRequest()) {
 }
 
 if (!$sent) {
-    fail();
+    fail('fehler.html', 'mail');
 }
 
-header('Location: danke.html', true, 303);
-exit;
+done();

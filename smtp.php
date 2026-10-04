@@ -7,6 +7,21 @@ declare(strict_types=1);
 
 function smtpLocalConfig(): ?array
 {
+    $host = trim((string) (getenv('SMTP_HOST') ?: ''));
+    $user = trim((string) (getenv('SMTP_USER') ?: ''));
+    $pass = (string) (getenv('SMTP_PASS') ?: '');
+    $from = trim((string) (getenv('SMTP_FROM') ?: $user));
+    $port = (int) (getenv('SMTP_PORT') ?: 587);
+    if ($host !== '' && $user !== '' && $pass !== '') {
+        return [
+            'host' => $host,
+            'port' => $port > 0 ? $port : 587,
+            'user' => $user,
+            'pass' => $pass,
+            'from' => $from !== '' ? $from : $user,
+        ];
+    }
+
     $file = __DIR__ . '/smtp-local.php';
     if (!is_file($file)) {
         return null;
