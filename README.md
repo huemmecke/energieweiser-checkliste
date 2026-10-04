@@ -36,7 +36,7 @@ Ohne PHP (z. B. Vercel-Vorschau) öffnet sich hilfsweise das Mailprogramm.
 - Haken Datenschutz
 - Datum, Ort (Datenschutz)
 
-Ein unsichtbares Feld `website` fangen Bots, die jedes Textfeld füllen. Echte Absender sehen es nicht. Name und Typ sind bewusst kein Telefon/Fax, damit der Browser nichts automatisch einträgt.
+Honeypot: unsichtbares Feld `website`. Bots, die jedes Textfeld füllen, bleiben daran hängen. Echte Absender sehen es nicht. Name und Typ sind bewusst kein Telefon/Fax, damit der Browser nichts automatisch einträgt.
 
 ## Live
 
