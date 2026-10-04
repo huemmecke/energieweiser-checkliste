@@ -1,4 +1,11 @@
 <?php
+/**
+ * Nimmt das Formular entgegen und verschickt die Checkliste als Textmail.
+ *
+ * Live: PHP mail() an MAIL_TO.
+ * Lokal: SMTP über smtp.php, Empfänger MAIL_TO_TEST, Kopie in tmp/letzte-mail.txt.
+ * GET ?ping=1: Antwort "php", damit das Frontend den PHP-Weg erkennt.
+ */
 declare(strict_types=1);
 
 const MAIL_TO = 'kontakt@energieweiser.de';
@@ -113,6 +120,7 @@ function fail(string $page = 'fehler.html'): void
     exit;
 }
 
+/** true bei Aufruf von localhost / 127.0.0.1, dann Testempfänger statt Live-Mail. */
 function isLocalRequest(): bool
 {
     $host = strtolower((string) ($_SERVER['SERVER_NAME'] ?? $_SERVER['HTTP_HOST'] ?? ''));
@@ -137,6 +145,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
     fail('index.html');
 }
 
+// Honeypot: Bots füllen faxnummer, Menschen nicht. Still zur Danke-Seite.
 if (post('faxnummer') !== '') {
     header('Location: danke.html', true, 303);
     exit;

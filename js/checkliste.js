@@ -1,3 +1,4 @@
+/** Formularlogik: Pflichtprüfung, Mailtext, Versand über PHP oder mailto. */
 const EMAIL = 'kontakt@energieweiser.de'
 const MULTI = [
   'gebaeudeNutzung',
@@ -84,6 +85,7 @@ function sanierungZeilen(data) {
   return all.length ? all.join('\n') : '–'
 }
 
+/** Liest alle Felder. Mehrfach-Checkboxen stehen in MULTI als Arrays. */
 function readForm() {
   const data = {}
   const fd = new FormData(form)
@@ -107,6 +109,7 @@ function readForm() {
   return data
 }
 
+/** Baut den Mailto-Text. CHECKLISTE_MAILTO überschreibt den Empfänger nur in lokalen Testskripten. */
 function buildMailto(data) {
   const subject = `Erstanfrage Checkliste – ${data.eigentuemerName || 'Wohngebäude'}`
   const body = `Checkliste Datenaufnahme Wohngebäude 2026
@@ -204,6 +207,7 @@ Unterschrift: ${dash(data.unterschriftDsgvo)}
   return `mailto:${window.CHECKLISTE_MAILTO || EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
 }
 
+/** Pflichtfelder für das Modal. Namen müssen zu input name/id passen. */
 const REQUIRED = [
   ['eigentuemerName', 'Name(n) GebäudeeigentümerIn'],
   ['eigentuemerKontakt', 'Telefonnummer, E-Mail'],
@@ -280,6 +284,7 @@ function openModal(items) {
   ;(first || modalGoto).focus()
 }
 
+/** PHP-Ping: bei Antwort "php" native POST, sonst Mailprogramm. */
 function sendForm() {
   const data = readForm()
   fetch('senden.php?ping=1', { cache: 'no-store' })

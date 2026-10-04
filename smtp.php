@@ -1,4 +1,8 @@
 <?php
+/**
+ * Lokaler SMTP-Versand (STARTTLS, AUTH LOGIN).
+ * Zugangsdaten nur in smtp-local.php – diese Datei nicht ins Git legen.
+ */
 declare(strict_types=1);
 
 function smtpLocalConfig(): ?array

@@ -1,3 +1,5 @@
+/* Checkliste: Tokens in :root, Schrift lokal, Mobil zuerst (Umbruch 640px). */
+
 @font-face {
   font-family: "Roboto Slab";
   src: url("../assets/fonts/RobotoSlab-Light.ttf") format("truetype");
