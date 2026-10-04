@@ -1,0 +1,11 @@
+.git
+.gitignore
+.vercel
+.vercelignore
+inbox
+backups
+tmp
+smtp-local.php
+js/testdaten.js
+README.md
+.DS_Store
