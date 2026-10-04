@@ -8,7 +8,7 @@
  */
 declare(strict_types=1);
 
-const MAIL_TO = 'kontakt@energieweiser.de';
+const MAIL_TO = 'mhuemmecke@gmx.de';
 const MAIL_TO_TEST = 'mhuemmecke@gmx.de, neubauer@energieweiser.de';
 const MAIL_FROM = 'Checkliste <kontakt@energieweiser.de>';
 

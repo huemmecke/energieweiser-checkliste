@@ -1,5 +1,5 @@
 /** Formularlogik: Pflichtprüfung, Mailtext, Versand über PHP oder mailto. */
-const EMAIL = 'kontakt@energieweiser.de'
+const EMAIL = 'mhuemmecke@gmx.de'
 const MULTI = [
   'gebaeudeNutzung',
   'waermeabgabe',
