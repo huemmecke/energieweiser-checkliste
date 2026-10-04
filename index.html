@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Checkliste 2026 zur Datenaufnahme für Wohngebäude – die energieweiser</title>
+    <link rel="icon" type="image/svg+xml" href="assets/ewe_logo_light_landscape.svg" />
+    <link rel="stylesheet" href="css/checkliste.css?v=21" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <img src="assets/ewe_logo_light_landscape.svg" alt="die energieweiser" />
+      </div>
+    </header>
+
+    <main class="page">
+      <div class="intro">
+        <img class="intro__arrow" src="assets/ewe_arrow_light.svg" alt="" />
+        <div>
+          <p class="intro__kicker">Checkliste 2026</p>
+          <h1>Grundlegende Datenerfassung zu Ihrem Objekt für die Energieberatung</h1>
+          <p>
+            Dieser Fragebogen stellt keine Auftragserteilung dar, sondern dient dazu, bereits vor dem
+            ersten Vor-Ort-Termin einen Überblick über Ihr Gebäude zu erlangen. Ferner sind weitere
+            Unterlagen aufgeführt, die über Ihr Gebäude benötigt werden und die Sie bitte bereithalten
+            sollten. Auf dieser Basis können wir uns auf Ihren Termin vorbereiten und später ein
+            konkretes Angebot für die gewünschten Leistungen erstellen.
+          </p>
+        </div>
+      </div>
+
+      <form id="checkliste" class="form" method="post" action="senden.php" autocomplete="off" novalidate>
+        <div class="hp" aria-hidden="true">
+          <label>Bitte leer lassen <input type="text" name="faxnummer" tabindex="-1" autocomplete="off" /></label>
+        </div>
+        <fieldset>
+          <legend>Gebäudeeigentümer/in</legend>
+          <label class="line">
+            <span>Name(n) GebäudeeigentümerIn</span>
+            <input id="eigentuemerName" name="eigentuemerName" type="text" required />
+          </label>
+          <label class="line">
+            <span>Straße Hausnummer</span>
+            <input name="eigentuemerStrasse" type="text" />
+          </label>
+          <label class="line">
+            <span>PLZ, Ort</span>
+            <input name="eigentuemerPlzOrt" type="text" />
+          </label>
+          <label class="line">
+            <span>Telefonnummer, E-Mail</span>
+            <input id="eigentuemerKontakt" name="eigentuemerKontakt" type="text" required />
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Gebäudeangaben</legend>
+          <label class="line">
+            <span>Straße Hausnummer</span>
+            <input id="gebaeudeStrasse" name="gebaeudeStrasse" type="text" required />
+          </label>
+          <label class="line">
+            <span>PLZ, Ort</span>
+            <input id="gebaeudePlzOrt" name="gebaeudePlzOrt" type="text" required />
+          </label>
+          <label class="line">
+            <span>Baujahr</span>
+            <input name="baujahr" type="text" />
+          </label>
+          <label class="line">
+            <span>Wohnfläche</span>
+            <input name="wohnflaeche" type="text" />
+          </label>
+          <label class="line">
+            <span>Selbst bewohnt / übernommen seit</span>
+            <input name="selbstBewohnt" type="text" />
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Um welche Gebäudeart handelt es sich?</legend>
+
+          <div class="art-row">
+            <label class="check">
+              <input type="radio" name="gebaeudeart" value="Einfamilienhaus" />
+              <span>Einfamilienhaus</span>
+            </label>
+            <span></span>
+            <label class="inline-field">
+              <span>Anzahl Nutzer:</span>
+              <input name="anzahlNutzer" type="text" />
+            </label>
+          </div>
+
+          <div class="art-row">
+            <label class="check">
+              <input type="radio" name="gebaeudeart" value="Mehrfamilienhaus" />
+              <span>Mehrfamilienhaus</span>
+            </label>
+            <label class="inline-field">
+              <span>Anzahl Wohneinheiten:</span>
+              <select name="anzahlWohneinheiten">
+                <option value=""></option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="mehr als 12">mehr als 12</option>
+              </select>
+            </label>
+            <label class="inline-field">
+              <span>Anzahl Nutzer:</span>
+              <input name="anzahlNutzerMfh" type="text" />
+            </label>
+          </div>
+
+          <div class="choice-row choice-row-3">
+            <label class="check"><input type="radio" name="gebaeudeform" value="Freistehend" /> <span>Freistehend</span></label>
+            <label class="check"><input type="radio" name="gebaeudeform" value="Einseitig angebaut" /> <span>Einseitig angebaut</span></label>
+            <label class="check"><input type="radio" name="gebaeudeform" value="Zweiseitig angebaut" /> <span>Zweiseitig angebaut</span></label>
+          </div>
+
+          <div class="choice-row choice-row-3">
+            <label class="check"><input type="checkbox" name="gebaeudeNutzung[]" value="eine WE selbstgenutzt" /> <span>eine WE selbstgenutzt</span></label>
+            <label class="check"><input type="checkbox" name="gebaeudeNutzung[]" value="alles vermietet" /> <span>alles vermietet</span></label>
+            <label class="check"><input type="checkbox" name="gebaeudeNutzung[]" value="aktueller Leerstand von WE" /> <span>aktueller Leerstand von WE</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Mischnutzung</legend>
+          <p class="group-label">Ist bei dem Gebäude eine Mischnutzung (Wohnen und Gewerbe) vorhanden?</p>
+          <div class="choice-row">
+            <label class="check"><input type="radio" name="mischnutzung" value="nein" /> <span>nein</span></label>
+            <label class="check"><input type="radio" name="mischnutzung" value="ja" /> <span>ja</span></label>
+            <label class="inline-field inline-field-wide">
+              <span>Anzahl Wohn-/Gewerbeeinheiten:</span>
+              <input name="mischWohnen" type="text" />
+              <span class="slash">/</span>
+              <input name="mischGewerbe" type="text" />
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Besonderheiten</legend>
+          <p class="group-label">Besonderheiten? (wie z.B. Denkmalschutz, Wintergarten, Schwimmbad, Anbauten…)</p>
+          <div class="choice-row">
+            <label class="check"><input type="radio" name="besonderheiten" value="nein" /> <span>nein</span></label>
+            <label class="check"><input type="radio" name="besonderheiten" value="ja" /> <span>ja</span></label>
+            <label class="inline-field inline-field-grow">
+              <span>Art:</span>
+              <input name="besonderheitenArt" type="text" />
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Angaben zur Beheizung / Heizungsanlage</legend>
+          <label class="line">
+            <span>Hersteller/Modell</span>
+            <input name="heizungHersteller" type="text" />
+          </label>
+          <label class="line line-half">
+            <span>Einbaujahr</span>
+            <input name="heizungEinbaujahr" type="text" />
+          </label>
+
+          <div class="labeled-list">
+            <span class="group-label">Typ</span>
+            <div class="checks checks-2">
+              <label class="check"><input type="radio" name="heizungTyp" value="Erdgas-Zentralheizung" /> <span>Erdgas-Zentralheizung</span></label>
+              <label class="check"><input type="radio" name="heizungTyp" value="Erdöl-Zentralheizung" /> <span>Erdöl-Zentralheizung</span></label>
+              <label class="check"><input type="radio" name="heizungTyp" value="Wärmepumpe" /> <span>Wärmepumpe</span></label>
+              <label class="check"><input type="radio" name="heizungTyp" value="Gas-Etagenheizung" /> <span>Gas-Etagenheizung</span></label>
+              <label class="check"><input type="radio" name="heizungTyp" value="Nachtspeicher-/Elektroheizung" /> <span>Nachtspeicher-/Elektroheizung</span></label>
+              <label class="check"><input type="radio" name="heizungTyp" value="Pellet-Zentralheizungskessel" /> <span>Pellet-Zentralheizungskessel</span></label>
+            </div>
+          </div>
+
+          <div class="choice-row">
+            <span class="group-label">Holz-Ofen/Kamin</span>
+            <label class="check"><input type="radio" name="ofen" value="ja" /> <span>ja</span></label>
+            <label class="check"><input type="radio" name="ofen" value="nein" /> <span>nein</span></label>
+            <label class="inline-field inline-field-grow">
+              <span>wo</span>
+              <input name="ofenWo" type="text" />
+            </label>
+          </div>
+
+          <div class="labeled-list">
+            <span class="group-label">Wärmeabgabe</span>
+            <div class="waerme-list">
+              <div class="waerme-head">
+                <span></span>
+                <span>in Geschossen</span>
+              </div>
+              <div class="waerme-row">
+                <label class="check"><input type="checkbox" name="waermeabgabe[]" value="Heizkörper" /> <span>Heizkörper</span></label>
+                <div class="waerme-floors">
+                  <label class="check"><input type="checkbox" name="waermeabgabeGeschoss_Heizkoerper[]" value="KG" /> <span>KG</span></label>
+                  <label class="check"><input type="checkbox" name="waermeabgabeGeschoss_Heizkoerper[]" value="EG" /> <span>EG</span></label>
+                  <label class="check"><input type="checkbox" name="waermeabgabeGeschoss_Heizkoerper[]" value="OG" /> <span>OG</span></label>
+                  <label class="check"><input type="checkbox" name="waermeabgabeGeschoss_Heizkoerper[]" value="DG" /> <span>DG</span></label>
+                </div>
+              </div>
+              <div class="waerme-row">
+                <label class="check"><input type="checkbox" name="waermeabgabe[]" value="Fußbodenheizung" /> <span>Fußbodenheizung</span></label>
+                <div class="waerme-floors">
+                  <label class="check"><input type="checkbox" name="waermeabgabeGeschoss_Fussboden[]" value="KG" /> <span>KG</span></label>
+                  <label class="check"><input type="checkbox" name="waermeabgabeGeschoss_Fussboden[]" value="EG" /> <span>EG</span></label>
+                  <label class="check"><input type="checkbox" name="waermeabgabeGeschoss_Fussboden[]" value="OG" /> <span>OG</span></label>
+                  <label class="check"><input type="checkbox" name="waermeabgabeGeschoss_Fussboden[]" value="DG" /> <span>DG</span></label>
+                </div>
+              </div>
+              <div class="waerme-row">
+                <label class="check"><input type="checkbox" name="waermeabgabe[]" value="Wand-/Flächenheizung" /> <span>Wand-/Flächenheizung</span></label>
+                <div class="waerme-floors">
+                  <label class="check"><input type="checkbox" name="waermeabgabeGeschoss_Wand[]" value="KG" /> <span>KG</span></label>
+                  <label class="check"><input type="checkbox" name="waermeabgabeGeschoss_Wand[]" value="EG" /> <span>EG</span></label>
+                  <label class="check"><input type="checkbox" name="waermeabgabeGeschoss_Wand[]" value="OG" /> <span>OG</span></label>
+                  <label class="check"><input type="checkbox" name="waermeabgabeGeschoss_Wand[]" value="DG" /> <span>DG</span></label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Angaben zur Warmwasserbereitung</legend>
+          <div class="choice-row">
+            <span>Kombibereitung zusammen mit Heizungsanlage</span>
+            <label class="check"><input type="radio" name="wwKombi" value="ja" /> <span>ja</span></label>
+            <label class="check"><input type="radio" name="wwKombi" value="nein" /> <span>nein</span></label>
+          </div>
+
+          <p class="group-label">Wenn nein, Angaben zum Warmwassererzeuger:</p>
+          <div class="pair">
+            <label class="line">
+              <span>Einbaujahr</span>
+              <input name="wwEinbaujahr" type="text" />
+            </label>
+            <label class="line">
+              <span>Energieträger</span>
+              <input name="wwEnergietraeger" type="text" />
+            </label>
+          </div>
+          <label class="line">
+            <span>Hersteller/Modell</span>
+            <input name="wwHersteller" type="text" />
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Angaben zu Solarthermie</legend>
+          <div class="choice-row">
+            <span>Solarthermie vorhanden?</span>
+            <label class="check"><input type="radio" name="solarthermie" value="ja" /> <span>ja</span></label>
+            <label class="check"><input type="radio" name="solarthermie" value="nein" /> <span>nein</span></label>
+          </div>
+          <p class="group-label">Wenn ja:</p>
+          <div class="pair">
+            <label class="line">
+              <span>Einbaujahr</span>
+              <input name="solarEinbaujahr" type="text" />
+            </label>
+            <label class="line">
+              <span>Standort</span>
+              <input name="solarStandort" type="text" />
+            </label>
+          </div>
+          <label class="line">
+            <span>Typ / Fläche</span>
+            <input name="solarTypFlaeche" type="text" />
+          </label>
+          <div class="choice-row">
+            <span>Betriebsweise:</span>
+            <label class="check"><input type="radio" name="solarBetrieb" value="nur für Warmwasser" /> <span>nur für Warmwasser</span></label>
+            <label class="check"><input type="radio" name="solarBetrieb" value="für Raumheizung und Warmwasser" /> <span>für Raumheizung und Warmwasser</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Angaben zu Photovoltaik</legend>
+          <div class="choice-row">
+            <span>PV vorhanden?</span>
+            <label class="check"><input type="radio" name="photovoltaik" value="ja" /> <span>ja</span></label>
+            <label class="check"><input type="radio" name="photovoltaik" value="nein" /> <span>nein</span></label>
+          </div>
+          <p class="group-label">Wenn ja:</p>
+          <div class="pair">
+            <label class="line">
+              <span>Einbaujahr</span>
+              <input name="pvEinbaujahr" type="text" />
+            </label>
+            <label class="line">
+              <span>Standort</span>
+              <input name="pvStandort" type="text" />
+            </label>
+          </div>
+          <label class="line">
+            <span>Typ / max. Leistung</span>
+            <input name="pvTypLeistung" type="text" />
+          </label>
+          <div class="choice-row">
+            <span>Stromspeicher:</span>
+            <label class="check"><input type="radio" name="pvSpeicher" value="nein" /> <span>nein</span></label>
+            <label class="check">
+              <input type="radio" name="pvSpeicher" value="ja" />
+              <span>ja, und zwar</span>
+            </label>
+            <label class="inline-field">
+              <input name="pvSpeicherKw" type="text" />
+              <span>kW</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Angaben zur Lüftungsanlage</legend>
+          <div class="choice-row">
+            <span>Lüftungsanlage vorhanden?</span>
+            <label class="check"><input type="radio" name="lueftung" value="ja" /> <span>ja</span></label>
+            <label class="check"><input type="radio" name="lueftung" value="nein" /> <span>nein</span></label>
+          </div>
+          <label class="line line-half">
+            <span>Einbaujahr</span>
+            <input name="lueftungEinbaujahr" type="text" />
+          </label>
+          <div class="labeled-list">
+            <span class="group-label">Typ</span>
+            <div class="checks">
+              <label class="check"><input type="radio" name="lueftungTyp" value="reine Abluftanlage" /> <span>reine Abluftanlage</span></label>
+              <label class="check"><input type="radio" name="lueftungTyp" value="Zu- und Abluftanlage (mit dezentralen Geräten)" /> <span>Zu- und Abluftanlage (mit dezentralen Geräten)</span></label>
+              <label class="check"><input type="radio" name="lueftungTyp" value="Zu- und Abluftanlage (mit zentraler Anlage)" /> <span>Zu- und Abluftanlage (mit zentraler Anlage)</span></label>
+            </div>
+          </div>
+          <div class="choice-row">
+            <span>WRG:</span>
+            <label class="check"><input type="radio" name="lueftungWrg" value="mit Wärmerückgewinnung" /> <span>mit Wärmerückgewinnung</span></label>
+            <label class="check"><input type="radio" name="lueftungWrg" value="ohne Wärmerückgewinnung" /> <span>ohne Wärmerückgewinnung</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Angaben zu vorgenommenen Sanierungen</legend>
+          <p class="group-label">Sind am Gebäude bereits Sanierungsmaßnahmen durchgeführt worden?</p>
+          <div class="choice-row">
+            <label class="check"><input type="radio" name="sanierungDurchgefuehrt" value="ja" /> <span>ja</span></label>
+            <label class="check"><input type="radio" name="sanierungDurchgefuehrt" value="nein" /> <span>nein</span></label>
+          </div>
+          <p class="group-label">Wenn ja, bitte weitere Angaben</p>
+          <div class="form-table">
+            <div class="form-table__head">
+              <span></span>
+              <span>Jahr:</span>
+              <span>Bitte genauere Angabe zur Maßnahme z.B. Dämmstoffstärke</span>
+            </div>
+            <div class="form-table__row">
+              <label class="check"><input type="checkbox" name="sanierungMassnahmen[]" value="Dach" /> <span>Dach</span></label>
+              <input name="sanierungJahr_Dach" type="text" />
+              <input name="sanierungAngabe_Dach" type="text" />
+            </div>
+            <div class="form-table__row">
+              <label class="check"><input type="checkbox" name="sanierungMassnahmen[]" value="oberste Geschossdecke" /> <span>oberste Geschossdecke</span></label>
+              <input name="sanierungJahr_OGD" type="text" />
+              <input name="sanierungAngabe_OGD" type="text" />
+            </div>
+            <div class="form-table__row">
+              <label class="check"><input type="checkbox" name="sanierungMassnahmen[]" value="Fenster / Haustüre" /> <span>Fenster / Haustüre</span></label>
+              <input name="sanierungJahr_Fenster" type="text" />
+              <input name="sanierungAngabe_Fenster" type="text" />
+            </div>
+            <div class="form-table__row">
+              <label class="check"><input type="checkbox" name="sanierungMassnahmen[]" value="Fassade / Außenwand" /> <span>Fassade / Außenwand</span></label>
+              <input name="sanierungJahr_Fassade" type="text" />
+              <input name="sanierungAngabe_Fassade" type="text" />
+            </div>
+            <div class="form-table__row">
+              <label class="check"><input type="checkbox" name="sanierungMassnahmen[]" value="Kellerdecke" /> <span>Kellerdecke</span></label>
+              <input name="sanierungJahr_Kellerdecke" type="text" />
+              <input name="sanierungAngabe_Kellerdecke" type="text" />
+            </div>
+            <div class="form-table__row">
+              <label class="check"><input type="checkbox" name="sanierungMassnahmen[]" value="Bodenplatte" /> <span>Bodenplatte</span></label>
+              <input name="sanierungJahr_Bodenplatte" type="text" />
+              <input name="sanierungAngabe_Bodenplatte" type="text" />
+            </div>
+            <div class="form-table__row">
+              <label class="check"><input type="checkbox" name="sanierungMassnahmen[]" value="Anlagentechnik (Heizung / WW)" /> <span>Anlagentechnik (Heizung / WW)</span></label>
+              <input name="sanierungJahr_Anlage" type="text" />
+              <input name="sanierungAngabe_Anlage" type="text" />
+            </div>
+            <div class="form-table__row">
+              <label class="check"><input type="checkbox" name="sanierungMassnahmen[]" value="Verteilleitungen" /> <span>Verteilleitungen</span></label>
+              <input name="sanierungJahr_Verteil" type="text" />
+              <input name="sanierungAngabe_Verteil" type="text" />
+            </div>
+            <div class="form-table__row">
+              <label class="check"><input type="checkbox" name="sanierungMassnahmen[]" value="Pumpen / Regelung" /> <span>Pumpen / Regelung</span></label>
+              <input name="sanierungJahr_Pumpen" type="text" />
+              <input name="sanierungAngabe_Pumpen" type="text" />
+            </div>
+            <div class="form-table__row">
+              <label class="check"><input type="checkbox" name="sanierungMassnahmen[]" value="Andere" /> <span>Andere</span></label>
+              <input name="sanierungJahr_Andere" type="text" />
+              <input name="sanierungAngabe_Andere" type="text" />
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Angaben zu geplanten oder notwendigen Sanierungen / Instandsetzungen</legend>
+          <p class="group-label">
+            Stehen in den nächsten Jahren am Gebäude notwendige Instandsetzungen an oder sind bereits
+            Sanierungs- oder gestalterische Maßnahmen geplant?
+          </p>
+          <div class="choice-row">
+            <label class="check"><input type="radio" name="sanierungGeplant" value="ja" /> <span>ja</span></label>
+            <label class="check"><input type="radio" name="sanierungGeplant" value="nein" /> <span>nein</span></label>
+          </div>
+          <p class="group-label">Wenn ja, bitte um weitere Angaben</p>
+          <div class="form-table form-table-2">
+            <div class="form-table__head">
+              <span>Angabe zur Maßnahme:</span>
+              <span>Umsetzungszeitraum:</span>
+            </div>
+            <div class="form-table__row">
+              <input name="geplantMassnahme_1" type="text" />
+              <input name="geplantZeitraum_1" type="text" />
+            </div>
+            <div class="form-table__row">
+              <input name="geplantMassnahme_2" type="text" />
+              <input name="geplantZeitraum_2" type="text" />
+            </div>
+            <div class="form-table__row">
+              <input name="geplantMassnahme_3" type="text" />
+              <input name="geplantZeitraum_3" type="text" />
+            </div>
+            <div class="form-table__row">
+              <input name="geplantMassnahme_4" type="text" />
+              <input name="geplantZeitraum_4" type="text" />
+            </div>
+            <div class="form-table__row">
+              <input name="geplantMassnahme_5" type="text" />
+              <input name="geplantZeitraum_5" type="text" />
+            </div>
+            <div class="form-table__row">
+              <input name="geplantMassnahme_6" type="text" />
+              <input name="geplantZeitraum_6" type="text" />
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Angaben für einkommensabhängige Förderungen und Kredite</legend>
+          <p class="group-label">
+            Um im Vorfeld Ihre möglichen Förderungen besser einordnen zu können, geben Sie uns bitte den
+            Bereich Ihres zu versteuernden Haushalts-Jahreseinkommens an:
+          </p>
+          <div class="choice-row choice-row-4">
+            <label class="check"><input type="radio" name="einkommen" value="Unter 30.000 €" /> <span>Unter 30.000 €</span></label>
+            <label class="check"><input type="radio" name="einkommen" value="bis 40.000 €" /> <span>bis 40.000 €</span></label>
+            <label class="check"><input type="radio" name="einkommen" value="bis 50.000 €" /> <span>bis 50.000 €</span></label>
+            <label class="check"><input type="radio" name="einkommen" value="über 90.000 €" /> <span>über 90.000 €</span></label>
+          </div>
+          <p class="group-label">Leben in Ihrem Haushalt noch eigene minderjährige Kinder?</p>
+          <div class="choice-row">
+            <label class="check"><input type="radio" name="kinder" value="ja" /> <span>ja</span></label>
+            <label class="check"><input type="radio" name="kinder" value="nein" /> <span>nein</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Bekannte Mängel</legend>
+          <p class="group-label">Gibt es bereits Problemstellen am Gebäude wie z.B. Bauschäden, Feuchteschäden, Schimmelbildung?</p>
+          <div class="choice-row">
+            <label class="check"><input type="radio" name="maengel" value="ja" /> <span>ja</span></label>
+            <label class="check"><input type="radio" name="maengel" value="nein" /> <span>nein</span></label>
+          </div>
+          <p class="group-label">Wenn ja, bitte um weitere Angaben</p>
+          <div class="form-table form-table-2">
+            <div class="form-table__head">
+              <span>Angabe zur Mängeln:</span>
+              <span>Ort:</span>
+            </div>
+            <div class="form-table__row">
+              <input name="maengelAngabe_1" type="text" />
+              <input name="maengelOrt_1" type="text" />
+            </div>
+            <div class="form-table__row">
+              <input name="maengelAngabe_2" type="text" />
+              <input name="maengelOrt_2" type="text" />
+            </div>
+            <div class="form-table__row">
+              <input name="maengelAngabe_3" type="text" />
+              <input name="maengelOrt_3" type="text" />
+            </div>
+            <div class="form-table__row">
+              <input name="maengelAngabe_4" type="text" />
+              <input name="maengelOrt_4" type="text" />
+            </div>
+            <div class="form-table__row">
+              <input name="maengelAngabe_5" type="text" />
+              <input name="maengelOrt_5" type="text" />
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Welchen Anforderungen soll die Energieberatung genügen?</legend>
+          <div class="checks">
+            <label class="check">
+              <input type="checkbox" name="beratungsziele[]" value="Informationen zu Einzelmaßnahmen-Fördermöglichkeiten" />
+              <span>Es werden Informationen zu Einzelmaßnahmen-Fördermöglichkeiten gewünscht.</span>
+            </label>
+            <label class="check">
+              <input type="checkbox" name="beratungsziele[]" value="Sanierung in mehreren Schritten (iSFP)" />
+              <span>Es ist eine Sanierung geplant, welche in mehreren Schritten über einen Zeitraum von mehreren Jahren durchgeführt werden soll. Hierfür könnte der geförderte iSFP, der „individuelle Sanierungsfahrplan“ das passende Modell sein.</span>
+            </label>
+            <label class="check">
+              <input type="checkbox" name="beratungsziele[]" value="Komplettsanierung (KfW-Effizienzhaus)" />
+              <span>Es ist eine Komplettsanierung geplant, die in einem komplett/teilweise unbewohnten Haus durchgeführt werden soll. Hierfür könnte das „kfW-Effizienzhaus“ ein Ziel sein.</span>
+            </label>
+            <label class="check">
+              <input type="checkbox" name="beratungsziele[]" value="Kurzberatung über Einsparpotentiale" />
+              <span>Es ist nur eine Kurzberatung über Einsparpotentiale gewünscht.</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Abschließender Hinweis:</legend>
+          <p class="legal-copy">
+            Ein Energieberater ist kein Finanz- oder Steuerberater oder Fördermittelbeschaffer. Es wird keine
+            Haftung übernommen für die rechtzeitige Beantragung von Fördermitteln, für die ausreichende
+            Bemessung von Fördermitteln, für Termine und Fristen der Fördermittelgeber oder für das Versagen
+            von Fördermitteln (z. B. Förderstopp oder nicht ausreichende Haushaltsmittel).
+          </p>
+          <p class="legal-copy legal-copy-strong">
+            Alle Angaben, sowie die zur Verfügung gestellten Unterlagen sind Grundlage für die
+            Energieberatung und ggf. für zukünftige finanzielle Förderungen. Sie sind vollständig &amp;
+            wahrheitsgemäß beantwortet.
+          </p>
+          <p class="group-label">Kostentransparenz</p>
+          <label class="consent">
+            <input id="kostentransparenz" name="kostentransparenz" type="checkbox" value="ja" required />
+            <span>
+              Ich habe zur Kenntnis genommen, dass der erste vor-Ort-Termin zur Datenaufnahme und
+              Förderpotentialerläuterung incl. schriftlichem Kurzbericht mit 290€ berechnet werden
+              wird. Nicht fällig würde diese Gebühr im Falle einer weiterführenden Beauftragung.
+            </span>
+          </label>
+          <div class="sign-row">
+            <label class="sign-field">
+              <input id="datumOrt" name="datumOrt" type="text" required />
+              <span>Datum, Ort</span>
+            </label>
+            <label class="sign-field">
+              <input name="unterschrift" type="text" />
+              <span>Unterschrift</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Datenschutzerklärung für das Formular „Checkliste - Datenaufnahme für Wohngebäude“</legend>
+          <div class="legal-block">
+            <p>
+              Gemäß Artikel 13 der EU-Datenschutzgrundverordnung (DSGVO) werden Sie hiermit über die
+              mit der Angabe Ihrer personenbezogenen Daten in das Formular verbundene Verarbeitung informiert.
+            </p>
+            <h2>1. Verantwortlicher:</h2>
+            <p>
+              „Ingenieurbüro Die Energieweiser“, Jakobistr. 22, 59494 Soest.
+              <a href="mailto:kontakt@energieweiser.de">kontakt@energieweiser.de</a>
+            </p>
+            <h2>2. Zweck der Datenverarbeitung:</h2>
+            <p>
+              Ihre Angaben zum Gebäude und der Anlagentechnik dienen dazu, einen groben Überblick zu Ihrem
+              Objekt zu erhalten. Die benötigten (Plan-) Unterlagen und Angaben dienen der Vorbereitung auf eine
+              Vor-Ort-Begehung, der Eingabe des Projekts in die Energieberater-Software zur Ermittlung des
+              Ist-Zustands des Gebäudes und von Sanierungsvorschlägen, zur Erbringung von Planungsleistungen
+              und für die Erstellung von Angeboten und Rechnungen. Die Kontaktdaten ermöglichen darüber hinaus
+              die Kundenkommunikation sowie das Anlegen einer Kundenkartei und der Projektdatei.
+            </p>
+            <h2>3. Rechtsgrundlage:</h2>
+            <p>
+              Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre
+              Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher
+              Maßnahmen erforderlich ist. Des Weiteren verarbeiten wir Ihre Daten, sofern diese zur Erfüllung
+              einer rechtlichen Verpflichtung erforderlich sind auf Grundlage von Art. 6 Abs. 1 lit. c DSGVO.
+              In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven
+              Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder auf Ihrer Einwilligung
+              (Art. 6 Abs. 1 lit. a DSGVO) sofern diese abgefragt wurde; die Einwilligung ist jederzeit widerrufbar.
+            </p>
+            <h2>4. Dauer der Speicherung Ihrer personenbezogenen Daten:</h2>
+            <p>
+              Die von Ihnen im Formular eingegebenen Daten verbleiben bei uns, bis Sie uns zur Löschung
+              auffordern, Ihre Einwilligung zur Speicherung widerrufen oder der Zweck für die Datenspeicherung
+              entfällt. Zwingende gesetzliche Bestimmungen – insbesondere Aufbewahrungsfristen – bleiben unberührt.
+            </p>
+            <h2>5. Ihre Rechte:</h2>
+            <p>
+              Sie haben das Recht, Auskunft über die zu Ihrer Person gespeicherten personenbezogenen Daten gemäß
+              Art. 15 DSGVO zu erhalten und/oder unrichtig gespeicherte personenbezogene Daten gemäß Art. 16
+              DSGVO berichtigen zu lassen. Sie haben darüber hinaus das Recht auf Löschung (Art. 17 DSGVO)
+              oder auf Einschränkung der Verarbeitung (Art. 18 DSGVO) oder ein Widerspruchsrecht gegen die
+              Verarbeitung (Art. 21 DSGVO).
+            </p>
+            <p>
+              Sie haben das Recht, die Einwilligung in die Verarbeitung Ihrer Daten jederzeit zu widerrufen,
+              wobei die Rechtmäßigkeit der aufgrund der Einwilligung bis zum Widerruf erfolgten Verarbeitung
+              nicht berührt wird (Art. 13 DSGVO).
+              Bitte senden Sie uns hierfür eine E-Mail an
+              <a href="mailto:kontakt@energieweiser.de">kontakt@energieweiser.de</a>
+            </p>
+          </div>
+
+          <p class="legal-copy">
+            Ich erkläre mich damit einverstanden, dass meine Daten (Name, Anschrift, Telefon, eMail), sowie
+            die Daten zum Beratungsobjekt (Angaben, Pläne, Berechnungen, Fotografien...) vom „Ingenieurbüro
+            Die Energieweiser“ gespeichert und verarbeitet werden dürfen. Diese Daten dürfen im Auftragsfall
+            ausdrücklich an befugte Empfänger (beauftragter Architekt, eingebundene Handwerker, sowie an die
+            BAFA/KfW-Förderbehörden) weitergegeben werden.
+          </p>
+
+          <label class="consent">
+            <input id="datenschutz" name="datenschutz" type="checkbox" value="ja" required />
+            <span>Ich stimme der Speicherung und Verarbeitung zu.</span>
+          </label>
+
+          <div class="sign-row">
+            <label class="sign-field">
+              <input id="datumOrtDsgvo" name="datumOrtDsgvo" type="text" required />
+              <span>Datum, Ort</span>
+            </label>
+            <label class="sign-field">
+              <input name="unterschriftDsgvo" type="text" />
+              <span>Unterschrift</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Wichtig: Bitte halten Sie für das erste Beratungsgespräch folgende Unterlagen bereit</legend>
+          <p class="group-label">Bitte geben Sie hier an, welche Unterlagen Ihnen vorliegen:</p>
+
+          <p class="group-label">Planunterlagen</p>
+          <div class="checks">
+            <label class="check"><input type="checkbox" name="unterlagenPlan[]" value="Lageplan des Gebäudes (auch Flurplan)" /> <span>Lageplan des Gebäudes (auch Flurplan)</span></label>
+            <label class="check"><input type="checkbox" name="unterlagenPlan[]" value="Grundrisse" /> <span>Grundrisse</span></label>
+            <label class="check"><input type="checkbox" name="unterlagenPlan[]" value="Schnitte" /> <span>Schnitte</span></label>
+            <label class="check"><input type="checkbox" name="unterlagenPlan[]" value="Ansichten" /> <span>Ansichten</span></label>
+          </div>
+
+          <p class="group-label">Detailzeichnungen</p>
+          <div class="checks">
+            <label class="check"><input type="checkbox" name="unterlagenDetail[]" value="Außenwanddetails" /> <span>Außenwanddetails</span></label>
+            <label class="check"><input type="checkbox" name="unterlagenDetail[]" value="Außenwandaufbau" /> <span>Außenwandaufbau</span></label>
+            <label class="check"><input type="checkbox" name="unterlagenDetail[]" value="Dachaufbau" /> <span>Dachaufbau</span></label>
+            <label class="check"><input type="checkbox" name="unterlagenDetail[]" value="Bodenplatte (bei beheiztem Keller)" /> <span>Bodenplatte (bei beheiztem Keller)</span></label>
+            <label class="check"><input type="checkbox" name="unterlagenDetail[]" value="Kellergeschossdecke (bei unbeheiztem Keller)" /> <span>Kellergeschossdecke (bei unbeheiztem Keller)</span></label>
+            <label class="check"><input type="checkbox" name="unterlagenDetail[]" value="Fenster" /> <span>Fenster</span></label>
+          </div>
+
+          <p class="group-label">Weitere Unterlagen</p>
+          <div class="checks">
+            <label class="check"><input type="checkbox" name="unterlagenWeitere[]" value="Baubeschreibung" /> <span>Baubeschreibung</span></label>
+            <label class="check"><input type="checkbox" name="unterlagenWeitere[]" value="Wärmeschutznachweis" /> <span>Wärmeschutznachweis</span></label>
+            <label class="check"><input type="checkbox" name="unterlagenWeitere[]" value="Letztes Schornsteinfegerprotokoll" /> <span>Letztes Schornsteinfegerprotokoll</span></label>
+            <label class="check"><input type="checkbox" name="unterlagenWeitere[]" value="Energieverbrauchsdaten der letzten drei Jahre (Gas, Öl, Holz, Strom)" /> <span>Energieverbrauchsdaten der letzten drei Jahre (Gas, Öl, Holz, Strom)</span></label>
+            <label class="check"><input type="checkbox" name="unterlagenWeitere[]" value="Unterlagen zu vorgenommenen Sanierungsmaßnahmen (z.B. Rechnungen für Fenster, Dämmung, Anlagentechnik)" /> <span>Unterlagen zu vorgenommenen Sanierungsmaßnahmen (z.B. Rechnungen für Fenster, Dämmung, Anlagentechnik)</span></label>
+            <label class="check"><input type="checkbox" name="unterlagenWeitere[]" value="Energieausweis oder bereits durchgeführte Energieberatung" /> <span>Energieausweis oder bereits durchgeführte Energieberatung</span></label>
+          </div>
+
+          <p class="group-label">Weitere Unterlagen:</p>
+          <div class="stack-lines">
+            <input name="unterlagenSonstiges_1" type="text" />
+            <input name="unterlagenSonstiges_2" type="text" />
+            <input name="unterlagenSonstiges_3" type="text" />
+            <input name="unterlagenSonstiges_4" type="text" />
+          </div>
+        </fieldset>
+
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">Checkliste per E-Mail senden</button>
+        </div>
+      </form>
+
+      <p class="disclaimer">
+        Die Unterschrift erfolgt durch das Absenden des Formulars. Bitte tragen Sie unter „Unterschrift“
+        Ihren Namen in Druckbuchstaben ein. Es werden keine Cookies gespeichert.
+      </p>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <p>
+          die energieweiser · Soest, NRW ·
+          <a href="mailto:kontakt@energieweiser.de">kontakt@energieweiser.de</a>
+        </p>
+      </div>
+      <div class="stripe" aria-hidden="true"></div>
+    </footer>
+
+    <div class="modal" id="pflicht-modal" hidden>
+      <div class="modal__backdrop" data-close-modal></div>
+      <div
+        class="modal__box"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="pflicht-title"
+        aria-describedby="pflicht-text"
+      >
+        <h2 id="pflicht-title">Pflichtfelder fehlen</h2>
+        <p id="pflicht-text">Diese Angaben werden noch benötigt. Tippen Sie einen Punkt an, um dorthin zu springen.</p>
+        <ul class="modal__list" id="pflicht-liste"></ul>
+        <button class="btn btn-primary" type="button" id="pflicht-goto">Zum ersten Feld</button>
+      </div>
+    </div>
+
+    <script src="js/checkliste.js?v=16"></script>
+  </body>
+</html>
