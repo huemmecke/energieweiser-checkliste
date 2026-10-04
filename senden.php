@@ -145,8 +145,8 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
     fail('index.html');
 }
 
-// Honeypot: Bots füllen faxnummer, Menschen nicht. Still zur Danke-Seite.
-if (post('faxnummer') !== '') {
+// Honeypot: unsichtbares Feld "website". Bots füllen es, Autofill eher nicht.
+if (post('website') !== '') {
     header('Location: danke.html', true, 303);
     exit;
 }
